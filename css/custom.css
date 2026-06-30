@@ -1694,10 +1694,10 @@ header.main-header .header-sticky.active {
 .why-choose-body ul li {
 	color: var(--secondary-color);
 	line-height: 1.5em;
-	padding-right: 30px;
+	padding-left: 30px;
 	background-image: url('../images/icon-sub-heading.png');
 	background-repeat: no-repeat;
-	background-position: right top 1px;
+	background-position: left top 1px;
 	background-size: 22px auto;
 	margin-bottom: 15px;
 }
@@ -1729,18 +1729,19 @@ header.main-header .header-sticky.active {
 	background-color: var(--white-color);
 	border: 1px solid var(--divider-color);
 	border-radius: 8px;
-	padding: 17px 20px 17px 30px;
+	padding: 17px 30px 17px 20px;
 	box-shadow: none;
 	outline: none;
+	text-align: left;
 }
 
 .request-quote-form .form-control::placeholder {
 	color: var(--text-color);
-	text-align: right;
+	text-align: left;
 }
 
 .request-quote-form .form-control.form-select {
-	padding: 17px 20px 17px 30px;
+	padding: 17px 30px 17px 20px;
 }
 
 .request-quote-form .form-control.form-select option {
@@ -1757,20 +1758,6 @@ header.main-header .header-sticky.active {
 	background: url('../images/testimonial-bg.png') no-repeat;
 	background-position: center center;
 	background-size: auto;
-}
-
-.our-testimonials:before {
-	content: '';
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	transform: translateY(50%);
-	background: url('../images/section-bg-shape-2.png') no-repeat;
-	background-position: bottom right;
-	background-size: contain;
-	width: 332px;
-	height: 391px;
-	z-index: 0;
 }
 
 .testimonial-slider {
@@ -1904,12 +1891,14 @@ header.main-header .header-sticky.active {
 	box-shadow: 0px 0px 30px 0px #2D3C4C0D;
 	padding: 60px;
 	margin: 80px 0;
-	margin-left: -80px;
+	margin-right: -80px;
+	margin-left: 0;
 	z-index: 1;
 }
 
 .faq-content-box {
-	padding-right: calc(((100vw - 1300px) / 2) - 10px);
+	padding-left: calc(((100vw - 1300px) / 2) - 10px);
+	padding-right: 0;
 }
 
 .faq-accordion .accordion-item {
@@ -1929,7 +1918,9 @@ header.main-header .header-sticky.active {
 	font-weight: 600;
 	line-height: 1.4em;
 	color: var(--accent-color);
-	padding-left: 25px;
+	padding-right: 30px;
+	padding-left: 0;
+	text-align: left;
 	transition: all 0.3s ease-in-out;
 }
 
@@ -1946,7 +1937,8 @@ header.main-header .header-sticky.active {
 	content: '\f107';
 	font-family: 'FontAwesome';
 	position: absolute;
-	left: 0;
+	right: 0;
+	left: auto;
 	top: 0;
 	font-size: 20px;
 	color: var(--primary-color);
@@ -1959,7 +1951,8 @@ header.main-header .header-sticky.active {
 }
 
 .faq-accordion .accordion-item .accordion-body {
-	padding-left: 25px;
+	padding-left: 0;
+	padding-right: 30px;
 }
 
 .faq-accordion .accordion-item:last-child .accordion-body {
@@ -2000,8 +1993,8 @@ header.main-header .header-sticky.active {
 .intro-video-button {
 	position: absolute;
 	top: 50%;
-	right: 50%;
-	transform: translate(50%, -50%);
+	left: 50%;
+	transform: translate(-50%, -50%);
 	z-index: 1;
 }
 
@@ -2274,7 +2267,7 @@ header.main-header .header-sticky.active {
 }
 
 .about-footer {
-	margin-left: 20px;
+	margin-left: 0;
 }
 
 .footer-logo {
@@ -2296,6 +2289,11 @@ header.main-header .header-sticky.active {
 	color: var(--white-color);
 	text-transform: capitalize;
 	margin-bottom: 20px;
+}
+
+.footer-links,
+.about-footer {
+	padding-right: 20px;
 }
 
 .footer-links p {
@@ -2332,7 +2330,8 @@ header.main-header .header-sticky.active {
 
 .footer-contact-item {
 	display: flex;
-	align-items: baseline;
+	align-items: flex-start;
+	gap: 12px;
 	margin-bottom: 20px;
 }
 
@@ -2341,7 +2340,9 @@ header.main-header .header-sticky.active {
 }
 
 .footer-contact-item .icon-box {
-	margin-left: 10px;
+	flex-shrink: 0;
+	margin: 0;
+	padding-top: 2px;
 }
 
 .footer-contact-item .icon-box img {
@@ -2350,7 +2351,8 @@ header.main-header .header-sticky.active {
 }
 
 .footer-contact-content {
-	width: calc(100% - 30px);
+	flex: 1;
+	min-width: 0;
 }
 
 .footer-contact-content p {
@@ -2376,12 +2378,12 @@ header.main-header .header-sticky.active {
 	line-height: 1.5em;
 	box-shadow: none;
 	margin-bottom: 20px;
-	text-align: right
+	text-align: left;
 }
 
 .footer-newsletter-form .form-group .form-control::placeholder {
 	color: var(--text-color);
-	text-align: right;
+	text-align: left;
 }
 
 .footer-copyright {
@@ -2403,15 +2405,18 @@ header.main-header .header-sticky.active {
 	margin: 0;
 	padding: 0;
 	list-style: none;
+	display: flex;
+	align-items: center;
+	gap: 20px;
 }
 
 .footer-social-links ul li {
 	display: inline-block;
-	margin-left: 20px;
+	margin: 0;
 }
 
 .footer-social-links ul li:last-child {
-	margin-left: 0;
+	margin: 0;
 }
 
 .footer-social-links ul li a {
@@ -4878,7 +4883,7 @@ header.main-header .header-sticky.active {
 	}
 
 	.why-choose-body ul li {
-		padding-right: 25px;
+		padding-left: 25px;
 		background-size: 18px auto;
 		margin-bottom: 12px;
 	}
@@ -4899,7 +4904,7 @@ header.main-header .header-sticky.active {
 	}
 
 	.request-quote-form .form-control.form-select {
-		padding: 12px 15px 12px 30px;
+		padding: 12px 30px 12px 15px;
 	}
 
 	.our-testimonials {
@@ -4931,11 +4936,6 @@ header.main-header .header-sticky.active {
 
 	.author-rating i {
 		font-size: 18px;
-	}
-
-	.our-testimonials:before {
-		width: 163px;
-		height: 191px;
 	}
 
 	.our-faqs {
@@ -5051,7 +5051,7 @@ header.main-header .header-sticky.active {
 	}
 
 	.about-footer {
-		margin: 0 0 30px 30px;
+		margin: 0 0 30px 0;
 	}
 
 	.footer-logo {
@@ -5075,8 +5075,8 @@ header.main-header .header-sticky.active {
 		margin-bottom: 15px;
 	}
 
-	.footer-social-links ul li {
-		margin-left: 15px;
+	.footer-social-links ul {
+		gap: 15px;
 	}
 
 	.footer-copyright {
@@ -5920,11 +5920,6 @@ header.main-header .header-sticky.active {
 		font-size: 24px;
 	}
 
-	.our-testimonials:before {
-		width: 120px;
-		height: 141px;
-	}
-
 	.testimonial-slider .swiper {
 		margin: 0px;
 		padding-bottom: 60px;
@@ -6020,6 +6015,8 @@ header.main-header .header-sticky.active {
 
 	.footer-copyright {
 		flex-direction: column;
+		align-items: center;
+		gap: 15px;
 		padding: 15px 0;
 		margin-top: 0;
 	}
@@ -6425,14 +6422,13 @@ header.main-header .header-sticky.active {
 	content: '\f104';
 }
 
-.why-choose-body ul li {
-	padding-right: 0;
-	padding-left: 30px;
-	background-position: left top 1px;
-}
-
 .contact-form .form-control,
 .contact-form .form-control::placeholder {
+	text-align: left;
+}
+
+.request-quote-form .form-control,
+.request-quote-form .form-control::placeholder {
 	text-align: left;
 }
 
