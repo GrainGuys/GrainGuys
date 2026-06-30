@@ -42,7 +42,7 @@ REPLACEMENTS = [
     # Service descriptions
     ("Hassle-free home moving services tailored to your needs.", "Repairs, fixes, and upkeep to keep your home in great shape."),
     ("Professional business moving services ensuring efficient, on-time relocations.", "Flat-pack and furniture assembly done right the first time."),
-    ("Professional business moving services that ensure efficient, on-time relocations.", "Interior and exterior painting with a clean, professional finish."),
+    ("Professional business moving services that ensure efficient, on-time relocations.", "Interior painting with a clean, professional finish."),
     ("Professional handling of fragile and valuable items with safe transport guaranteed.", "Tile, laminate, and flooring installation with precision."),
     ("Expert handling of fragile and valuable items, ensuring safe transport of antiques and heirlooms.", "Shelving, built-ins, and custom storage tailored to your space."),
     ("Sustainable moving solutions using eco-friendly materials and methods to reduce waste.", "Retail and shop counters built to your specifications."),

@@ -447,7 +447,7 @@ body {
 	top: 50%;
 	right: 0;
 	transform: translateY(-50%);
-	background: url('../images/icon-sub-heading.svg') no-repeat;
+	background: url('../images/icon-sub-heading.png') no-repeat;
 	background-position: right center;
 	background-size: cover;
 	width: 24px;
@@ -958,15 +958,25 @@ header.main-header .header-sticky.active {
 .satisfy-customer-image {
 	position: relative;
 	display: inline-block;
-	margin-right: -14px;
 	border: 1px solid var(--accent-color);
 	border-radius: 50%;
 	overflow: hidden;
+}
+
+.satisfy-customer-image:not(:first-child) {
+	margin-left: -14px;
+}
+
+.satisfy-customer-image:nth-child(1) {
 	z-index: 1;
 }
 
-.satisfy-customer-image:first-child {
-	margin: 0;
+.satisfy-customer-image:nth-child(2) {
+	z-index: 2;
+}
+
+.satisfy-customer-image:nth-child(3) {
+	z-index: 3;
 }
 
 .satisfy-customer-image figure {
@@ -1683,7 +1693,7 @@ header.main-header .header-sticky.active {
 	color: var(--secondary-color);
 	line-height: 1.5em;
 	padding-right: 30px;
-	background-image: url('../images/icon-sub-heading.svg');
+	background-image: url('../images/icon-sub-heading.png');
 	background-repeat: no-repeat;
 	background-position: right top 1px;
 	background-size: 22px auto;
@@ -2963,7 +2973,7 @@ header.main-header .header-sticky.active {
 	color: var(--text-color);
 	line-height: 1.4em;
 	padding-right: 30px;
-	background-image: url('../images/icon-sub-heading.svg');
+	background-image: url('../images/icon-sub-heading.png');
 	background-repeat: no-repeat;
 	background-position: right top 1px;
 	background-size: 22px auto;
@@ -3353,7 +3363,7 @@ header.main-header .header-sticky.active {
 	color: var(--text-color);
 	line-height: 1.4em;
 	padding-right: 30px;
-	background-image: url('../images/icon-sub-heading.svg');
+	background-image: url('../images/icon-sub-heading.png');
 	background-repeat: no-repeat;
 	background-position: right top 1px;
 	background-size: 22px auto;
@@ -3490,7 +3500,7 @@ header.main-header .header-sticky.active {
 }
 
 .service-entry-content-item {
-	background-image: url(../images/icon-sub-heading.svg);
+	background-image: url(../images/icon-sub-heading.png);
 	background-repeat: no-repeat;
 	background-position: right top 1px;
 	background-size: 24px auto;
@@ -4020,7 +4030,7 @@ header.main-header .header-sticky.active {
 	color: var(--text-color);
 	line-height: 1.4em;
 	padding-right: 30px;
-	background-image: url('../images/icon-sub-heading.svg');
+	background-image: url('../images/icon-sub-heading.png');
 	background-repeat: no-repeat;
 	background-position: right top 1px;
 	background-size: 22px auto;
@@ -4246,7 +4256,7 @@ header.main-header .header-sticky.active {
 	color: var(--text-color);
 	line-height: 1.4em;
 	padding-right: 30px;
-	background-image: url('../images/icon-sub-heading.svg');
+	background-image: url('../images/icon-sub-heading.png');
 	background-repeat: no-repeat;
 	background-position: right top 1px;
 	background-size: 22px auto;
