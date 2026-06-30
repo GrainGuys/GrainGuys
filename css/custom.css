@@ -1321,6 +1321,10 @@ header.main-header .header-sticky.active {
 	margin-bottom: 30px;
 }
 
+.project-image {
+	position: relative;
+}
+
 .project-image figure {
 	display: block;
 	border-radius: 40px;
@@ -1353,9 +1357,10 @@ header.main-header .header-sticky.active {
 
 .project-btn {
 	position: absolute;
-	top: 50%;
-	right: 50%;
-	transform: translate(50%, -25%);
+	top: 24px;
+	right: 24px;
+	left: auto;
+	transform: none;
 	opacity: 0;
 	visibility: hidden;
 	transition: all 0.4s ease-in-out;
@@ -1363,7 +1368,7 @@ header.main-header .header-sticky.active {
 }
 
 .project-item:hover .project-btn {
-	transform: translate(50%, -50%);
+	transform: none;
 	opacity: 1;
 	visibility: visible;
 }
@@ -1385,12 +1390,12 @@ header.main-header .header-sticky.active {
 
 .project-btn a img {
 	max-width: 24px;
-	transform: rotate(45deg);
+	transform: scaleX(-1) rotate(-45deg);
 	transition: all 0.3s ease-in-out;
 }
 
 .project-btn a:hover img {
-	transform: rotate(0deg);
+	transform: scaleX(-1) rotate(0deg);
 }
 
 .project-content {
@@ -3306,6 +3311,9 @@ header.main-header .header-sticky.active {
 	font-weight: 600;
 	color: var(--secondary-color);
 	transition: all 0.4s ease-in-out;
+	display: inline-flex;
+	align-items: center;
+	gap: 12px;
 }
 
 .sidebar-cta-btn a:hover {
@@ -3315,7 +3323,29 @@ header.main-header .header-sticky.active {
 .sidebar-cta-btn a img {
 	width: 100%;
 	max-width: 30px;
-	margin-left: 15px;
+	margin-left: 0;
+	flex-shrink: 0;
+}
+
+.sidebar-cta-content .btn-default::after {
+	content: '\f061';
+	font-family: 'Font Awesome 6 Free';
+	font-size: 12px;
+	font-weight: 700;
+	color: var(--secondary-color);
+	width: 24px;
+	height: 24px;
+	background-image: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transform: translate(-20px, -50%) scaleX(1);
+}
+
+.sidebar-cta-content .btn-default:hover::after {
+	color: var(--primary-color);
+	transform: translate(-17px, -50%) scaleX(1);
+	filter: none;
 }
 
 .page-single-image {
@@ -3608,6 +3638,125 @@ header.main-header .header-sticky.active {
 .service-entry-item:hover .service-entry-item-content h3,
 .service-entry-item:hover .service-entry-item-content p {
 	color: var(--white-color);
+}
+
+/************************************/
+/***  Service Page Template css   ***/
+/************************************/
+.service-page .page-header-subtitle {
+	font-size: 18px;
+	font-weight: 500;
+	color: var(--accent-color);
+	max-width: 720px;
+	margin: 20px auto 0;
+	line-height: 1.6em;
+}
+
+.page-header-accent::before {
+	background: linear-gradient(180deg, rgba(45, 60, 76, 0.15) 0%, rgba(45, 60, 76, 0.95) 85%), linear-gradient(180deg, rgba(45, 60, 76, 0.75) 0%, rgba(45, 60, 76, 0.2) 35%);
+}
+
+.page-header-premium .page-header-box h1 {
+	font-size: 62px;
+}
+
+.service-template-essential .page-header-box h1 {
+	font-size: 54px;
+}
+
+.service-layout-install .page-single-sidebar {
+	margin-left: 0;
+	margin-right: 20px;
+}
+
+.service-layout-reverse .service-entry-image-content {
+	flex-direction: row-reverse;
+}
+
+.service-sidebar-details {
+	margin-bottom: 60px;
+}
+
+.service-sidebar-details .project-detail-box {
+	border: 1px solid var(--divider-color);
+	border-radius: 40px;
+	overflow: hidden;
+}
+
+.service-cta-band {
+	padding: 60px 0;
+}
+
+.service-cta-band .why-choose-box {
+	display: block;
+	text-align: center;
+}
+
+.service-cta-band .why-choose-content {
+	max-width: 720px;
+	margin: 0 auto;
+}
+
+.service-cta-band .why-choose-body ul {
+	justify-content: center;
+}
+
+.service-cta-band .service-cta-band-btn {
+	margin-top: 30px;
+	text-align: center;
+}
+
+.service-template-install .page-service-single {
+	padding-top: 80px;
+}
+
+body.service-template-install .why-choose-us {
+	padding: 80px 0;
+}
+
+body.service-template-install .why-choose-us .why-choose-box {
+	display: block;
+}
+
+body.service-template-install .why-choose-us .why-choose-content {
+	max-width: 800px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+body.service-template-install .why-choose-us .why-choose-body ul {
+	justify-content: center;
+}
+
+body.service-template-install .why-choose-us .service-cta-band-btn {
+	margin-top: 30px;
+}
+
+@media only screen and (max-width: 991px) {
+	.page-header-premium .page-header-box h1,
+	.service-template-essential .page-header-box h1 {
+		font-size: 44px;
+	}
+
+	.service-layout-reverse .service-entry-image-content {
+		flex-direction: column;
+	}
+
+	.service-layout-install .page-single-sidebar {
+		margin-right: 0;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.service-page .page-header-subtitle {
+		font-size: 16px;
+		margin-top: 15px;
+	}
+
+	.page-header-premium .page-header-box h1,
+	.service-template-essential .page-header-box h1 {
+		font-size: 36px;
+	}
 }
 
 /************************************/
@@ -5351,7 +5500,7 @@ header.main-header .header-sticky.active {
 
 	.sidebar-cta-btn a img {
 		max-width: 26px;
-		margin-left: 10px;
+		margin-left: 0;
 	}
 
 	.page-single-image figure {

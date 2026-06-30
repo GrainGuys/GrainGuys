@@ -30,7 +30,7 @@ The repository contains the full front-end codebase, assets, and lightweight PHP
 
 - **Home** — Three variants: standard (`index.html`), slider hero (`index-slider.html`), and video hero (`index-video.html`)
 - **About Us** — Company story, mission, vision, and experience counters
-- **Services** — Service grid with individual detail pages (`service-single.html`)
+- **Services** — Service grid with nine dedicated detail pages (`service-general-repairs.html`, `service-furniture-assembly.html`, and more)
 - **Projects** — Portfolio listing and project detail pages
 - **Blog** — Article listing and single post template
 - **Team** — Team roster and individual member pages
@@ -79,7 +79,15 @@ GrainGuys/
 ├── index-video.html           # Homepage with video hero
 ├── about.html                 # About page
 ├── services.html              # Services listing
-├── service-single.html        # Service detail template
+├── service-general-repairs.html # General repairs service detail
+├── service-furniture-assembly.html
+├── service-painting-decorating.html
+├── service-kitchen-fitting.html
+├── service-flooring-tiling.html
+├── service-custom-woodwork.html
+├── service-shop-counter-construction.html
+├── service-bespoke-design-work.html
+├── service-general-handyman.html
 ├── projects.html              # Project portfolio
 ├── project-single.html        # Project detail template
 ├── blog.html                  # Blog listing
