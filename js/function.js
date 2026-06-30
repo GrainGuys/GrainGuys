@@ -65,12 +65,62 @@
   });
 
   /* testimonial Slider JS */
+  var testimonial_slider;
+
+  function initTestimonialClampOnElement($content) {
+    var $p = $content.find("p").first();
+    if (!$p.length || $content.hasClass("is-expanded")) {
+      return;
+    }
+
+    $content.removeClass("is-clamped is-expandable");
+    $content.removeAttr("role tabindex aria-expanded title");
+
+    $content.addClass("is-clamped");
+    if ($p[0].scrollHeight > $p[0].clientHeight + 2) {
+      $content.addClass("is-expandable");
+      $content.attr({
+        role: "button",
+        tabindex: "0",
+        "aria-expanded": "false",
+        title: "Click to read full review",
+      });
+    } else {
+      $content.removeClass("is-clamped");
+    }
+  }
+
+  function initTestimonialClamp() {
+    $(".testimonial-content").each(function () {
+      initTestimonialClampOnElement($(this));
+    });
+
+    if (testimonial_slider) {
+      if (testimonial_slider.updateAutoHeight) {
+        testimonial_slider.updateAutoHeight();
+      } else if (testimonial_slider.update) {
+        testimonial_slider.update();
+      }
+    }
+  }
+
+  function collapseExpandedTestimonials($scope) {
+    ($scope || $(".our-testimonials, .page-testimonials"))
+      .find(".testimonial-content.is-expanded")
+      .each(function () {
+        var $content = $(this);
+        $content.removeClass("is-expanded").attr("aria-expanded", "false");
+        initTestimonialClampOnElement($content);
+      });
+  }
+
   if ($(".testimonial-slider").length) {
-    const testimonial_slider = new Swiper(".testimonial-slider .swiper", {
+    testimonial_slider = new Swiper(".testimonial-slider .swiper", {
       slidesPerView: 1,
       speed: 1000,
       spaceBetween: 30,
       loop: true,
+      autoHeight: true,
       autoplay: {
         delay: 5000,
       },
@@ -91,7 +141,68 @@
         },
       },
     });
+
+    testimonial_slider.on("slideChangeTransitionStart", function () {
+      collapseExpandedTestimonials($(".our-testimonials"));
+    });
+
+    testimonial_slider.on("slideChangeTransitionEnd", function () {
+      initTestimonialClamp();
+    });
   }
+
+  $(document).on("click", ".testimonial-content.is-expandable", function (e) {
+    e.preventDefault();
+    var $content = $(this);
+    var $scope = $content.closest(".our-testimonials, .page-testimonials");
+
+    if ($content.hasClass("is-expanded")) {
+      $content.removeClass("is-expanded").attr("aria-expanded", "false");
+      initTestimonialClampOnElement($content);
+      if (testimonial_slider) {
+        if (testimonial_slider.updateAutoHeight) {
+          testimonial_slider.updateAutoHeight();
+        } else if (testimonial_slider.update) {
+          testimonial_slider.update();
+        }
+      }
+      return;
+    }
+
+    $scope.find(".testimonial-content.is-expanded").each(function () {
+      var $other = $(this);
+      $other.removeClass("is-expanded").attr("aria-expanded", "false");
+      initTestimonialClampOnElement($other);
+    });
+
+    $content.addClass("is-expanded").removeClass("is-clamped");
+    $content.attr("aria-expanded", "true");
+
+    if (testimonial_slider) {
+      if (testimonial_slider.updateAutoHeight) {
+        testimonial_slider.updateAutoHeight();
+      } else if (testimonial_slider.update) {
+        testimonial_slider.update();
+      }
+    }
+  });
+
+  $(document).on("keydown", ".testimonial-content.is-expandable", function (e) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      $(this).trigger("click");
+    }
+  });
+
+  $(window).on("load", function () {
+    initTestimonialClamp();
+  });
+
+  var testimonialResizeTimer;
+  $(window).on("resize", function () {
+    clearTimeout(testimonialResizeTimer);
+    testimonialResizeTimer = setTimeout(initTestimonialClamp, 200);
+  });
 
   /* Skill Bar */
   if ($(".skills-progress-bar").length) {
