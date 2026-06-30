@@ -1446,7 +1446,7 @@ header.main-header .header-sticky.active {
 	width: calc(25% - 22.5px);
 }
 
-.work-process-item:nth-child(even) {
+.work-process-item:nth-child(odd) {
 	margin-top: 90px;
 }
 
