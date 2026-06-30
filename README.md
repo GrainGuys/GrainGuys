@@ -152,7 +152,33 @@ Before deploying, update the recipient email in the PHP handlers:
 2. Open `form-appointment.php` and configure the recipient address similarly
 3. Ensure your hosting environment supports PHP `mail()` or replace with an SMTP library
 
-### Deployment
+### GitHub Pages (Dev & Demo)
+
+The site is hosted free on **GitHub Pages** for development and demo previews.
+
+| | |
+|---|---|
+| **Live demo** | [https://grainguys.github.io/GrainGuys/](https://grainguys.github.io/GrainGuys/) |
+| **Source branch** | `master` (repository root) |
+| **Cost** | Free |
+
+Every push to `master` updates the demo site automatically (usually within 1–2 minutes).
+
+**Demo limitations on GitHub Pages:**
+
+- Contact and appointment forms show a demo message instead of sending email (PHP is not supported on GitHub Pages)
+- For live form handling, deploy to a PHP-capable host (see Production Deployment below)
+
+**Enable or reconfigure Pages** (org admins):
+
+```bash
+gh api --method POST /repos/GrainGuys/GrainGuys/pages \
+  -f 'source[branch]=master' -f 'source[path]=/'
+```
+
+Or in the GitHub UI: **Settings → Pages → Build from branch `master` / root**.
+
+### Production Deployment
 
 Deploy the repository contents to any web host that supports static files. For form functionality, choose a host with PHP support (e.g., shared hosting, VPS, or a PHP-enabled platform).
 

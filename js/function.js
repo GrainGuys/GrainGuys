@@ -3,6 +3,7 @@
 
   var $window = $(window);
   var $body = $("body");
+  var isStaticDemoHost = location.hostname.endsWith(".github.io");
 
   /* Preloader Effect */
   $window.on("load", function () {
@@ -271,6 +272,15 @@
   });
 
   function submitForm() {
+    if (isStaticDemoHost) {
+      formSuccess();
+      submitMSG(
+        true,
+        "Demo site — form not sent. Use a PHP host for live submissions."
+      );
+      return;
+    }
+
     /* Ajax call to submit form */
     $.ajax({
       type: "POST",
@@ -311,6 +321,15 @@
   });
 
   function submitappointmentForm() {
+    if (isStaticDemoHost) {
+      appointmentformSuccess();
+      appointmentsubmitMSG(
+        true,
+        "Demo site — form not sent. Use a PHP host for live submissions."
+      );
+      return;
+    }
+
     /* Ajax call to submit form */
     $.ajax({
       type: "POST",
