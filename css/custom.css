@@ -4432,6 +4432,7 @@ header.main-header .header-sticky.active {
 	background: var(--primary-color);
 	display: flex;
 	align-items: center;
+	gap: 20px;
 	border-radius: 20px;
 	padding: 20px;
 	margin-bottom: 30px;
@@ -4470,7 +4471,8 @@ header.main-header .header-sticky.active {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin-left: 20px;
+	flex-shrink: 0;
+	margin: 0;
 }
 
 .contact-info-item .icon-box img {
@@ -4480,7 +4482,8 @@ header.main-header .header-sticky.active {
 
 .contact-info-content {
 	position: relative;
-	width: calc(100% - 80px);
+	flex: 1;
+	min-width: 0;
 	z-index: 1;
 }
 
@@ -4499,8 +4502,13 @@ header.main-header .header-sticky.active {
 	color: inherit;
 }
 
+.contact-us-content {
+	padding-right: 30px;
+}
+
 .contact-us-form {
-	margin-right: 30px;
+	margin-right: 0;
+	padding-left: 15px;
 }
 
 .contact-form .form-group {
@@ -4518,12 +4526,12 @@ header.main-header .header-sticky.active {
 	padding: 17px 20px 17px 60px;
 	box-shadow: none;
 	outline: none;
-	text-align: right;
+	text-align: left;
 }
 
 .contact-form .form-control::placeholder {
 	color: var(--text-color);
-	text-align: right;
+	text-align: left;
 }
 
 .contact-form .form-group i,
@@ -4539,6 +4547,10 @@ header.main-header .header-sticky.active {
 
 .contact-form .form-group img {
 	width: 20px;
+}
+
+.contact-form textarea.form-control {
+	padding-left: 20px;
 }
 
 .google-map .container-fluid {
@@ -5706,6 +5718,12 @@ header.main-header .header-sticky.active {
 
 	.contact-us-content {
 		margin-bottom: 30px;
+		padding-right: 0;
+	}
+
+	.contact-us-form {
+		margin-right: 0;
+		padding-left: 0;
 	}
 
 	.contact-info-item {
@@ -5715,23 +5733,19 @@ header.main-header .header-sticky.active {
 	.contact-info-item .icon-box {
 		width: 50px;
 		height: 50px;
-		margin-left: 10px;
-	}
-
-	.contact-info-content {
-		width: calc(100% - 60px);
+		margin: 0;
 	}
 
 	.contact-info-item .icon-box img {
 		max-width: 26px;
 	}
 
-	.contact-us-form {
-		margin-right: 0;
-	}
-
 	.contact-form .form-control {
 		padding: 12px 15px 12px 40px;
+	}
+
+	.contact-form textarea.form-control {
+		padding-left: 15px;
 	}
 
 	.contact-form .form-group i,
