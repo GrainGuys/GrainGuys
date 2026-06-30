@@ -162,7 +162,9 @@ The site is hosted free on **GitHub Pages** for development and demo previews.
 | **Source branch** | `master` (repository root) |
 | **Cost** | Free |
 
-Every push to `master` updates the demo site automatically (usually within 1–2 minutes).
+Every push to `master` triggers the [Deploy to GitHub Pages](.github/workflows/pages.yml) workflow and updates the demo site automatically (usually within 1–2 minutes).
+
+**How it works:** GitHub Actions uploads the repository as a static artifact and deploys it via the official Pages pipeline (no Jekyll, no server required).
 
 **Demo limitations on GitHub Pages:**
 
@@ -171,12 +173,13 @@ Every push to `master` updates the demo site automatically (usually within 1–2
 
 **Enable or reconfigure Pages** (org admins):
 
-```bash
-gh api --method POST /repos/GrainGuys/GrainGuys/pages \
-  -f 'source[branch]=master' -f 'source[path]=/'
-```
+In the GitHub UI: **Settings → Pages → Source: GitHub Actions**.
 
-Or in the GitHub UI: **Settings → Pages → Build from branch `master` / root**.
+Or via CLI:
+
+```bash
+gh api --method PUT /repos/GrainGuys/GrainGuys/pages -f "build_type=workflow"
+```
 
 ### Production Deployment
 
