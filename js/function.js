@@ -225,11 +225,6 @@
     );
   }
 
-  /* Youtube Background Video JS */
-  if ($("#herovideo").length) {
-    var myPlayer = $("#herovideo").YTPlayer();
-  }
-
   /* Init Counter */
   if ($(".counter").length) {
     $(".counter").counterUp({ delay: 6, time: 3000 });
@@ -373,6 +368,162 @@
     },
   });
 
+  /* Project single page photo viewer dialog */
+  function initProjectPhotoViewer() {
+    var $container = $(".page-project-single .project-single-content");
+    if (!$container.length) {
+      return;
+    }
+
+    var photos = [];
+
+    $container
+      .find(".page-single-image figure, .project-before-after-figure")
+      .each(function () {
+        var $figure = $(this);
+        var $img = $figure.find("img").first();
+        if (!$img.length) {
+          return;
+        }
+
+        var src = $img.attr("src");
+        if (!src) {
+          return;
+        }
+
+        var label = $figure.find(".project-before-after-label").first().text().trim();
+        var alt = $img.attr("alt") || "";
+        var index = photos.length;
+
+        photos.push({
+          src: src,
+          alt: alt,
+          label: label,
+          caption: label ? label + ": " + alt : alt,
+        });
+
+        $figure
+          .addClass("project-photo-trigger")
+          .attr({
+            "data-photo-index": index,
+            role: "button",
+            tabindex: "0",
+            "aria-label": "View photo" + (alt ? ": " + alt : ""),
+          });
+      });
+
+    if (!photos.length) {
+      return;
+    }
+
+    if (!$("#projectPhotoViewer").length) {
+      $("body").append(
+        '<div id="projectPhotoViewer" class="project-photo-viewer" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Project photo viewer">' +
+          '<div class="project-photo-viewer-backdrop" data-photo-viewer-close></div>' +
+          '<div class="project-photo-viewer-dialog">' +
+            '<button type="button" class="project-photo-viewer-close" aria-label="Close photo viewer">&times;</button>' +
+            '<button type="button" class="project-photo-viewer-nav project-photo-viewer-prev" aria-label="Previous photo">&#10094;</button>' +
+            '<button type="button" class="project-photo-viewer-nav project-photo-viewer-next" aria-label="Next photo">&#10095;</button>' +
+            '<figure class="project-photo-viewer-figure">' +
+              '<img class="project-photo-viewer-image" src="" alt="">' +
+              '<figcaption class="project-photo-viewer-caption"></figcaption>' +
+            '</figure>' +
+            '<p class="project-photo-viewer-counter" aria-live="polite"></p>' +
+          "</div>" +
+        "</div>"
+      );
+    }
+
+    var $viewer = $("#projectPhotoViewer");
+    var $image = $viewer.find(".project-photo-viewer-image");
+    var $caption = $viewer.find(".project-photo-viewer-caption");
+    var $counter = $viewer.find(".project-photo-viewer-counter");
+    var currentIndex = 0;
+    var lastFocus = null;
+
+    function showPhoto(index) {
+      currentIndex = index;
+      var photo = photos[currentIndex];
+      $image.attr({ src: photo.src, alt: photo.alt });
+      $caption.text(photo.caption);
+      $counter.text(currentIndex + 1 + " / " + photos.length);
+      $viewer
+        .find(".project-photo-viewer-prev")
+        .prop("disabled", currentIndex === 0);
+      $viewer
+        .find(".project-photo-viewer-next")
+        .prop("disabled", currentIndex === photos.length - 1);
+    }
+
+    function openViewer(index) {
+      lastFocus = document.activeElement;
+      showPhoto(index);
+      $viewer.removeAttr("hidden").attr("aria-hidden", "false");
+      $("body").addClass("project-photo-viewer-open");
+      $viewer.find(".project-photo-viewer-close").trigger("focus");
+    }
+
+    function closeViewer() {
+      $viewer.attr({ hidden: "hidden", "aria-hidden": "true" });
+      $("body").removeClass("project-photo-viewer-open");
+      $image.attr("src", "");
+      if (lastFocus) {
+        $(lastFocus).trigger("focus");
+      }
+    }
+
+    function showRelative(step) {
+      var nextIndex = currentIndex + step;
+      if (nextIndex >= 0 && nextIndex < photos.length) {
+        showPhoto(nextIndex);
+      }
+    }
+
+    $container.on("click", ".project-photo-trigger", function (event) {
+      event.preventDefault();
+      openViewer(parseInt($(this).attr("data-photo-index"), 10));
+    });
+
+    $container.on("keydown", ".project-photo-trigger", function (event) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openViewer(parseInt($(this).attr("data-photo-index"), 10));
+      }
+    });
+
+    $viewer.on("click", "[data-photo-viewer-close], .project-photo-viewer-close", function () {
+      closeViewer();
+    });
+
+    $viewer.on("click", ".project-photo-viewer-prev", function () {
+      showRelative(-1);
+    });
+
+    $viewer.on("click", ".project-photo-viewer-next", function () {
+      showRelative(1);
+    });
+
+    $viewer.on("click", ".project-photo-viewer-dialog", function (event) {
+      event.stopPropagation();
+    });
+
+    $(document).on("keydown.projectPhotoViewer", function (event) {
+      if ($viewer.attr("aria-hidden") === "true") {
+        return;
+      }
+
+      if (event.key === "Escape") {
+        closeViewer();
+      } else if (event.key === "ArrowLeft") {
+        showRelative(-1);
+      } else if (event.key === "ArrowRight") {
+        showRelative(1);
+      }
+    });
+  }
+
+  initProjectPhotoViewer();
+
   /* Contact form validation */
   var $contactform = $("#contactForm");
   $contactform.validator({ focus: false }).on("submit", function (event) {
@@ -473,17 +624,6 @@
 
   /* Animated Wow Js */
   new WOW().init();
-
-  /* Popup Video */
-  if ($(".popup-video").length) {
-    $(".popup-video").magnificPopup({
-      type: "iframe",
-      mainClass: "mfp-fade",
-      removalDelay: 160,
-      preloader: false,
-      fixedContentPos: true,
-    });
-  }
 
   /* Service Entry Step Item Active Start */
   var $service_solution_steps = $(".service-solution-steps");
