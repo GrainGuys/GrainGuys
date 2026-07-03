@@ -5,6 +5,9 @@
   var $body = $("body");
   var isStaticDemoHost = location.hostname.endsWith(".github.io");
 
+  // Get your free access key at https://web3forms.com (works on Cloudflare Pages and GitHub Pages).
+  var WEB3FORMS_ACCESS_KEY = "REPLACE_WITH_YOUR_ACCESS_KEY";
+
   /* Preloader Effect */
   $window.on("load", function () {
     $(".preloader").fadeOut(600);
@@ -534,26 +537,51 @@
   });
 
   function submitForm() {
-    if (isStaticDemoHost) {
-      formSuccess();
+    if (
+      !WEB3FORMS_ACCESS_KEY ||
+      WEB3FORMS_ACCESS_KEY === "REPLACE_WITH_YOUR_ACCESS_KEY"
+    ) {
       submitMSG(
-        true,
-        "Demo site — form not sent. Use a PHP host for live submissions."
+        false,
+        "Contact form is not configured yet. Please call 07709 034572."
       );
       return;
     }
 
-    /* Ajax call to submit form */
+    var $submitBtn = $contactform.find('button[type="submit"]');
+    $submitBtn.prop("disabled", true);
+
     $.ajax({
       type: "POST",
-      url: "form-process.php",
-      data: $contactform.serialize(),
-      success: function (text) {
-        if (text === "success") {
+      url: $contactform.attr("action"),
+      data:
+        $contactform.serialize() +
+        "&access_key=" +
+        encodeURIComponent(WEB3FORMS_ACCESS_KEY) +
+        "&subject=" +
+        encodeURIComponent("New GrainGuys contact form message") +
+        "&from_name=" +
+        encodeURIComponent("GrainGuys Website"),
+      dataType: "json",
+      success: function (response) {
+        if (response && response.success) {
           formSuccess();
         } else {
-          submitMSG(false, text);
+          submitMSG(
+            false,
+            (response && response.message) ||
+              "Something went wrong. Please try again or call us directly."
+          );
         }
+      },
+      error: function () {
+        submitMSG(
+          false,
+          "Something went wrong. Please try again or call us directly."
+        );
+      },
+      complete: function () {
+        $submitBtn.prop("disabled", false);
       },
     });
   }
