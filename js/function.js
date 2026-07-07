@@ -526,6 +526,53 @@
 
   initProjectPhotoViewer();
 
+  function ensureFormToastContainer() {
+    var $container = $("#formToastContainer");
+    if (!$container.length) {
+      $container = $(
+        '<div id="formToastContainer" class="toast-container position-fixed top-0 end-0 p-3 form-toast-container"></div>'
+      );
+      $("body").append($container);
+    }
+    return $container;
+  }
+
+  function showFormToast(message, type) {
+    type = type || "success";
+    var $container = ensureFormToastContainer();
+    var $toast = $(
+      '<div class="toast form-toast form-toast--' +
+        type +
+        '" role="alert" aria-live="assertive" aria-atomic="true"></div>'
+    );
+    var $body = $('<div class="toast-body d-flex align-items-center gap-3"></div>');
+    var iconClass =
+      type === "success" ? "fa-solid fa-circle-check" : "fa-solid fa-circle-exclamation";
+
+    $body.append(
+      '<span class="form-toast__icon" aria-hidden="true"><i class="' +
+        iconClass +
+        '"></i></span>'
+    );
+    $body.append($('<span class="form-toast__message"></span>').text(message));
+    $body.append(
+      '<button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close"></button>'
+    );
+    $toast.append($body);
+    $container.append($toast);
+
+    var toast = bootstrap.Toast.getOrCreateInstance($toast[0], {
+      autohide: true,
+      delay: 5000,
+    });
+
+    $toast[0].addEventListener("hidden.bs.toast", function () {
+      $toast.remove();
+    });
+
+    toast.show();
+  }
+
   /* Contact form validation */
   var $contactform = $("#contactForm");
   $contactform.validator({ focus: false }).on("submit", function (event) {
@@ -587,7 +634,8 @@
 
   function formSuccess() {
     $contactform[0].reset();
-    submitMSG(true, "Your message was sent successfully!");
+    $("#msgSubmit").removeClass().addClass("h4 hidden").text("");
+    showFormToast("Your message was sent successfully!", "success");
   }
 
   function submitMSG(valid, msg) {
@@ -661,7 +709,8 @@
 
   function appointmentformSuccess() {
     $requestquoteForm[0].reset();
-    appointmentsubmitMSG(true, "Your message was sent successfully!");
+    $("#msgSubmit").removeClass().addClass("h3 hidden").text("");
+    showFormToast("Your message was sent successfully!", "success");
   }
 
   function appointmentsubmitMSG(valid, msg) {

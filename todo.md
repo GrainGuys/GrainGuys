@@ -6,14 +6,16 @@ Checklist for hosting **GrainGuys.co.uk** on **Cloudflare Pages** and handling c
 
 ## Current status
 
-| Item | Status |
-|------|--------|
-| Static site (HTML/CSS/JS) | Ready |
-| Domain on Cloudflare (`grainguys.co.uk`) | Done (transferred from GoDaddy) |
-| Contact form → Web3Forms | Implemented in code — **access key still required** |
-| Appointment form (`requestquoteForm`) | Migrated to Web3Forms — **access key still required** |
-| Cloudflare Pages production deploy | Not started |
-| Long-term serverless form handler | Planned (optional upgrade) |
+
+| Item                                     | Status                                                |
+| ---------------------------------------- | ----------------------------------------------------- |
+| Static site (HTML/CSS/JS)                | Ready                                                 |
+| Domain on Cloudflare (`grainguys.co.uk`) | Done (transferred from GoDaddy)                       |
+| Contact form → Web3Forms                 | Implemented in code — **access key still required**   |
+| Appointment form (`requestquoteForm`)    | Migrated to Web3Forms — **access key still required** |
+| Cloudflare Pages production deploy       | Not started                                           |
+| Long-term serverless form handler        | Planned (optional upgrade)                            |
+
 
 ---
 
@@ -30,19 +32,20 @@ Cloudflare Pages cannot run PHP. The contact form on `contact.html` and `team-si
 
 ### Files involved
 
-| File | Role |
-|------|------|
-| `contact.html` | Main contact page form (`#contactForm`) |
-| `team-single.html` | Team member page contact form (`#contactForm`) |
-| `js/function.js` | Validation, Web3Forms submit, `WEB3FORMS_ACCESS_KEY` config |
-| `form-process.php` | Legacy PHP handler — **not used** on Cloudflare Pages |
+
+| File               | Role                                                        |
+| ------------------ | ----------------------------------------------------------- |
+| `contact.html`     | Main contact page form (`#contactForm`)                     |
+| `team-single.html` | Team member page contact form (`#contactForm`)              |
+| `js/function.js`   | Validation, Web3Forms submit, `WEB3FORMS_ACCESS_KEY` config |
+| `form-process.php` | Legacy PHP handler — **not used** on Cloudflare Pages       |
+
 
 ### TODO — finish Web3Forms setup
 
-- [ ] Go to [https://web3forms.com](https://web3forms.com) and create a free access key
-- [ ] Register the key with your business email (e.g. `info@grainguys.com`)
-- [ ] Open `js/function.js` and replace the placeholder:
-
+- [x] Go to [https://web3forms.com](https://web3forms.com) and create a free access key
+- [x] Register the key with your business email (e.g. `info@grainguys.com`)
+- [x] Open `js/function.js` and replace the placeholder:
   ```js
   var WEB3FORMS_ACCESS_KEY = "REPLACE_WITH_YOUR_ACCESS_KEY";
   ```
@@ -54,13 +57,15 @@ Cloudflare Pages cannot run PHP. The contact form on `contact.html` and `team-si
 
 ### Form fields sent to Web3Forms
 
-| Field | Description |
-|-------|-------------|
-| `fname` | First name |
-| `lname` | Last name |
-| `email` | Sender email |
-| `phone` | Phone number |
+
+| Field     | Description  |
+| --------- | ------------ |
+| `fname`   | First name   |
+| `lname`   | Last name    |
+| `email`   | Sender email |
+| `phone`   | Phone number |
 | `message` | Message body |
+
 
 Email subject is set in JS: `New GrainGuys contact form message`.
 
@@ -104,11 +109,11 @@ Host the static site free on **Cloudflare Pages** with custom domain **grainguys
 2. Select the GrainGuys repository
 3. Build settings:
 
-   | Setting | Value |
-   |---------|--------|
-   | Framework preset | **None** |
-   | Build command | *(leave empty)* |
-   | Build output directory | `/` *(repository root)* |
+  | Setting                | Value                   |
+  | ---------------------- | ----------------------- |
+  | Framework preset       | **None**                |
+  | Build command          | *(leave empty)*         |
+  | Build output directory | `/` *(repository root)* |
 
 4. **Save and Deploy** — you get a `*.pages.dev` preview URL
 
@@ -122,10 +127,12 @@ Host the static site free on **Cloudflare Pages** with custom domain **grainguys
 
 Typical records when domain is on Cloudflare:
 
-| Type | Name | Target |
-|------|------|--------|
-| CNAME | `www` | `<project-name>.pages.dev` |
+
+| Type             | Name       | Target                                                  |
+| ---------------- | ---------- | ------------------------------------------------------- |
+| CNAME            | `www`      | `<project-name>.pages.dev`                              |
 | CNAME or flatten | `@` (apex) | Pages (Cloudflare often uses CNAME flattening for apex) |
+
 
 Use the exact records shown in the Pages **Custom domains** UI.
 
@@ -153,13 +160,15 @@ Open `http://localhost:8000/contact.html`. Form submit requires a valid `WEB3FOR
 
 ### GitHub Pages vs Cloudflare Pages
 
-| | GitHub Pages | Cloudflare Pages |
-|---|--------------|------------------|
-| Cost | Free | Free |
-| Custom domain | Yes | Yes (easier when DNS is on Cloudflare) |
-| PHP | No | No |
-| Contact form (Web3Forms) | Yes | Yes |
-| Recommended for production | Demo | **Production (`grainguys.co.uk`)** |
+
+|                            | GitHub Pages | Cloudflare Pages                       |
+| -------------------------- | ------------ | -------------------------------------- |
+| Cost                       | Free         | Free                                   |
+| Custom domain              | Yes          | Yes (easier when DNS is on Cloudflare) |
+| PHP                        | No           | No                                     |
+| Contact form (Web3Forms)   | Yes          | Yes                                    |
+| Recommended for production | Demo         | **Production (`grainguys.co.uk`)**     |
+
 
 GitHub Pages can stay as a demo/staging URL; point the live domain to Cloudflare Pages.
 
@@ -188,7 +197,6 @@ Browser → POST /api/contact → Pages Function → Resend/SendGrid → info@gr
 - [ ] Create `functions/api/contact.js` (or `functions/api/contact.ts`) in the repo
 - [ ] Add Cloudflare environment variables (e.g. `RESEND_API_KEY`, `CONTACT_TO_EMAIL`) in Pages project settings — **never commit secrets**
 - [ ] Update `contact.html` / `team-single.html`:
-
   ```html
   <form id="contactForm" action="/api/contact" method="POST">
   ```
@@ -222,10 +230,12 @@ See [Cloudflare Pages Functions docs](https://developers.cloudflare.com/pages/fu
 
 `form-process.php` is **not used** on Cloudflare Pages or GitHub Pages. `form-appointment.php` has been removed; the quote form uses Web3Forms.
 
-| File | Status on static hosting |
-|------|--------------------------|
-| `form-process.php` | Superseded by Web3Forms (contact) |
+
+| File                   | Status on static hosting            |
+| ---------------------- | ----------------------------------- |
+| `form-process.php`     | Superseded by Web3Forms (contact)   |
 | `form-appointment.php` | Removed — quote form uses Web3Forms |
+
 
 Keep PHP files in the repo for reference or remove after all forms are migrated.
 
@@ -237,7 +247,7 @@ Keep PHP files in the repo for reference or remove after all forms are migrated.
 - [ ] Cloudflare Pages project connected to Git
 - [ ] `grainguys.co.uk` and `www` attached to Pages
 - [ ] Contact form tested on production
-- [ ] Appointment / quote form tested on production
+- [ ] Appointment form migrated (Web3Forms or Functions)
 - [ ] Footer/header emails and phone links verified
 - [ ] `404.html` works for missing routes (configure in Cloudflare Pages if needed)
 
@@ -249,3 +259,4 @@ Keep PHP files in the repo for reference or remove after all forms are migrated.
 - [Cloudflare Pages](https://developers.cloudflare.com/pages/)
 - [Cloudflare Pages Functions](https://developers.cloudflare.com/pages/functions/)
 - [Resend + Cloudflare Workers/Pages](https://resend.com/docs)
+
