@@ -1,0 +1,21 @@
+# Cloudflare Workers static assets — exclude dev/build metadata
+.git/
+**/.git/**
+node_modules/
+.wrangler/
+.cursor/
+.vscode/
+.idea/
+
+# Git pack files (can exceed 25 MiB during CI builds)
+*.pack
+*.idx
+*.rev
+*.bitmap
+
+# OS / editor / secrets
+.DS_Store
+Thumbs.db
+desktop.ini
+.env
+.env.*
