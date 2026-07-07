@@ -3,10 +3,9 @@
 
   var $window = $(window);
   var $body = $("body");
-  var isStaticDemoHost = location.hostname.endsWith(".github.io");
 
   // Get your free access key at https://web3forms.com (works on Cloudflare Pages and GitHub Pages).
-  var WEB3FORMS_ACCESS_KEY = "REPLACE_WITH_YOUR_ACCESS_KEY";
+  var WEB3FORMS_ACCESS_KEY = "822a6311-8560-4b44-b90f-056e1ab2efd1";
 
   /* Preloader Effect */
   $window.on("load", function () {
@@ -611,32 +610,57 @@
   });
 
   function submitappointmentForm() {
-    if (isStaticDemoHost) {
-      appointmentformSuccess();
+    if (
+      !WEB3FORMS_ACCESS_KEY ||
+      WEB3FORMS_ACCESS_KEY === "REPLACE_WITH_YOUR_ACCESS_KEY"
+    ) {
       appointmentsubmitMSG(
-        true,
-        "Demo site — form not sent. Use a PHP host for live submissions."
+        false,
+        "Contact form is not configured yet. Please call 07709 034572."
       );
       return;
     }
 
-    /* Ajax call to submit form */
+    var $submitBtn = $requestquoteForm.find('button[type="submit"]');
+    $submitBtn.prop("disabled", true);
+
     $.ajax({
       type: "POST",
-      url: "form-appointment.php",
-      data: $requestquoteForm.serialize(),
-      success: function (text) {
-        if (text === "success") {
+      url: $requestquoteForm.attr("action"),
+      data:
+        $requestquoteForm.serialize() +
+        "&access_key=" +
+        encodeURIComponent(WEB3FORMS_ACCESS_KEY) +
+        "&subject=" +
+        encodeURIComponent("New GrainGuys quote request") +
+        "&from_name=" +
+        encodeURIComponent("GrainGuys Website"),
+      dataType: "json",
+      success: function (response) {
+        if (response && response.success) {
           appointmentformSuccess();
         } else {
-          appointmentsubmitMSG(false, text);
+          appointmentsubmitMSG(
+            false,
+            (response && response.message) ||
+              "Something went wrong. Please try again or call us directly."
+          );
         }
+      },
+      error: function () {
+        appointmentsubmitMSG(
+          false,
+          "Something went wrong. Please try again or call us directly."
+        );
+      },
+      complete: function () {
+        $submitBtn.prop("disabled", false);
       },
     });
   }
 
   function appointmentformSuccess() {
-    $appointmentForm[0].reset();
+    $requestquoteForm[0].reset();
     appointmentsubmitMSG(true, "Your message was sent successfully!");
   }
 

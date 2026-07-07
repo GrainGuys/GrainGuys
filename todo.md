@@ -11,7 +11,7 @@ Checklist for hosting **GrainGuys.co.uk** on **Cloudflare Pages** and handling c
 | Static site (HTML/CSS/JS) | Ready |
 | Domain on Cloudflare (`grainguys.co.uk`) | Done (transferred from GoDaddy) |
 | Contact form → Web3Forms | Implemented in code — **access key still required** |
-| Appointment form (`requestquoteForm`) | Still uses `form-appointment.php` — **not wired yet** |
+| Appointment form (`requestquoteForm`) | Migrated to Web3Forms — **access key still required** |
 | Cloudflare Pages production deploy | Not started |
 | Long-term serverless form handler | Planned (optional upgrade) |
 
@@ -66,22 +66,25 @@ Email subject is set in JS: `New GrainGuys contact form message`.
 
 ---
 
-## 2. Appointment form — still to do
+## 2. Appointment / quote form — Web3Forms
 
-The homepage (and `about.html`, `index-slider.html`, `index-video.html`) use `#requestquoteForm`, which still posts to `form-appointment.php` via `js/function.js`. That will **not work** on Cloudflare Pages.
+The homepage (and `about.html`, `index-slider.html`, `index-video.html`) use `#requestquoteForm`, which now posts to Web3Forms via `js/function.js` (same `WEB3FORMS_ACCESS_KEY` as the contact form).
 
-### TODO — wire appointment form (pick one)
+### What is already done
 
-**Option A — Web3Forms (quickest, same as contact form)**
+- Form `action` set to `https://api.web3forms.com/submit` on all four pages
+- Honeypot spam field (`botcheck`) added
+- `submitappointmentForm()` in `js/function.js` posts to Web3Forms
+- Email subject: `New GrainGuys quote request`
 
-- [ ] Add Web3Forms `action` and `botcheck` honeypot to `#requestquoteForm` on all pages that use it
-- [ ] Update `submitappointmentForm()` in `js/function.js` to post to Web3Forms (reuse `WEB3FORMS_ACCESS_KEY` or a second key)
-- [ ] Use a distinct email subject, e.g. `New GrainGuys appointment request`
-- [ ] Test on live site
+### TODO — finish setup
+
+- [ ] Set `WEB3FORMS_ACCESS_KEY` in `js/function.js` (shared with contact form)
+- [ ] Test quote form on `index.html` and `about.html` on the live site
 
 **Option B — Long-term Cloudflare Function** (see [§4](#4-long-term-option-cloudflare-pages-functions))
 
-- [ ] Implement `/api/appointment` alongside `/api/contact`
+- [ ] Implement `/api/appointment` alongside `/api/contact` (optional upgrade)
 
 ---
 
@@ -217,12 +220,12 @@ See [Cloudflare Pages Functions docs](https://developers.cloudflare.com/pages/fu
 
 ## 5. Legacy PHP handlers
 
-`form-process.php` and `form-appointment.php` are **not used** on Cloudflare Pages or GitHub Pages.
+`form-process.php` is **not used** on Cloudflare Pages or GitHub Pages. `form-appointment.php` has been removed; the quote form uses Web3Forms.
 
 | File | Status on static hosting |
 |------|--------------------------|
 | `form-process.php` | Superseded by Web3Forms (contact) |
-| `form-appointment.php` | Still referenced by appointment form — migrate next |
+| `form-appointment.php` | Removed — quote form uses Web3Forms |
 
 Keep PHP files in the repo for reference or remove after all forms are migrated.
 
@@ -234,7 +237,7 @@ Keep PHP files in the repo for reference or remove after all forms are migrated.
 - [ ] Cloudflare Pages project connected to Git
 - [ ] `grainguys.co.uk` and `www` attached to Pages
 - [ ] Contact form tested on production
-- [ ] Appointment form migrated (Web3Forms or Functions)
+- [ ] Appointment / quote form tested on production
 - [ ] Footer/header emails and phone links verified
 - [ ] `404.html` works for missing routes (configure in Cloudflare Pages if needed)
 

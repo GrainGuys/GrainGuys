@@ -46,14 +46,7 @@ The repository contains the full front-end codebase, assets, and lightweight PHP
 - Animated counters and parallax sections
 - Custom cursor effects
 - Contact and appointment forms with client-side validation
-- PHP mail handlers for form processing (`form-process.php`, `form-appointment.php`)
-
-### Content Management Utilities
-
-- `update_handyman_content.py` — Batch content update script
-- `translate_site.py` — Site translation utility
-
----
+- PHP mail handler for form processing (`form-process.php`)
 
 ## Technology Stack
 
@@ -66,7 +59,6 @@ The repository contains the full front-end codebase, assets, and lightweight PHP
 | **Typography** | Google Fonts — Inter |
 | **Icons** | Font Awesome |
 | **Backend (forms)** | PHP (`mail()` for contact and appointment submissions) |
-| **Tooling** | Python 3 (optional content scripts) |
 
 ---
 
@@ -100,8 +92,7 @@ GrainGuys/
 ├── faqs.html                  # Frequently asked questions
 ├── contact.html               # Contact page
 ├── 404.html                   # Not found page
-├── form-process.php           # Contact form handler
-├── form-appointment.php       # Appointment form handler
+├── form-process.php           # Contact form handler (legacy; contact uses Web3Forms)
 ├── css/
 │   ├── bootstrap.min.css      # Bootstrap framework
 │   ├── custom.css             # Project-specific styles
@@ -111,8 +102,6 @@ GrainGuys/
 │   ├── jquery-3.7.1.min.js    # jQuery
 │   └── …                      # Plugin scripts
 ├── images/                    # Logos, icons, photos, SVG assets
-├── update_handyman_content.py # Content update utility
-├── translate_site.py          # Translation utility
 └── README.md                  # This file
 ```
 
@@ -156,9 +145,8 @@ npx serve .
 
 Before deploying, update the recipient email in the PHP handlers:
 
-1. Open `form-process.php` and set `$to` to your business email address
-2. Open `form-appointment.php` and configure the recipient address similarly
-3. Ensure your hosting environment supports PHP `mail()` or replace with an SMTP library
+1. Open `form-process.php` and set `$to` to your business email address (legacy PHP host only)
+2. Ensure your hosting environment supports PHP `mail()` or replace with an SMTP library
 
 ### GitHub Pages (Dev & Demo)
 
@@ -196,7 +184,7 @@ Deploy the repository contents to any web host that supports static files. For f
 Typical deployment steps:
 
 1. Upload all files to the web root (`public_html`, `www`, or equivalent)
-2. Verify `form-process.php` and `form-appointment.php` permissions and mail settings
+2. Verify `form-process.php` permissions and mail settings (if using PHP hosting)
 3. Test contact and appointment forms in production
 4. Point your domain DNS to the hosting provider
 
@@ -206,7 +194,7 @@ Typical deployment steps:
 
 1. **Clone the repository** and create a feature branch from `main`
 2. **Run locally** using the PHP or static server commands above
-3. **Edit content** directly in HTML files or use the Python utilities for bulk updates
+3. **Edit content** directly in HTML files
 4. **Style changes** go in `css/custom.css`; avoid editing vendor/minified files under `css/` and `js/`
 5. **Behavior changes** go in `js/function.js`
 6. **Test responsively** across mobile, tablet, and desktop breakpoints
