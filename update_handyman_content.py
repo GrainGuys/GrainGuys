@@ -24,10 +24,10 @@ REPLACEMENTS = [
     ("Subscribe for alerts, our latest blog posts, and moving insights.", "Subscribe for project tips, updates, and handyman insights."),
     ("Subscribe for alerts, our latest blogs, thoughts, and insights.", "Subscribe for project tips, updates, and handyman insights."),
     # CTAs
-    ("Get Started", "Free Estimate"),
-    ("Request a Quote", "Free Estimate"),
-    ("Book Your Service Today", "Get a Free Estimate"),
-    ("Contact Us Today", "Request Free Estimate"),
+    ("Get Started", "free quote"),
+    ("Request a Quote", "free quote"),
+    ("Book Your Service Today", "Get a free quote"),
+    ("Contact Us Today", "Request free quote"),
     # Titles
     ("GrainGuys - Moving & Packing Company", "GrainGuys - Handyman Services"),
     # Service names (order matters - specific before general)
@@ -78,8 +78,8 @@ REPLACEMENTS = [
     ("Custom moving plans tailored to your needs.", "Reliable, friendly service you can count on."),
     ("Eco-friendly methods for sustainable moving.", "Flexible availability to suit your schedule."),
     # Work process
-    ("Get a Quote", "Free Estimate"),
-    ("Start by contacting us for a free, personalized quote. Share the details of your move with us.", "Call or text for a free estimate. Tell us about your project and we'll provide honest advice."),
+    ("Get a Quote", "free quote"),
+    ("Start by contacting us for a free, personalized quote. Share the details of your move with us.", "Call or text for a free quote. Tell us about your project and we'll provide honest advice."),
     ("Plan Your Move", "Plan the Job"),
     ("Our team works with you to create a custom moving plan—from packing to logistics.", "We agree on scope, materials, and timing so you know exactly what to expect."),
     ("Safe &amp; Secure Moving", "Quality Work"),
@@ -106,14 +106,14 @@ REPLACEMENTS = [
         "Take a closer look at our recent projects and see how we turn every move into a seamless experience. From small local relocations to large-scale moves, we take pride in the care we deliver.",
         "Take a closer look at recent jobs—from quick repairs to bespoke carpentry—and see the care we put into every project.",
     ),
-    ("Expert packing for your move. <a href=\"contact.html\">Contact us today</a>", "Free estimates available. <a href=\"contact.html\">Call or text today</a>"),
+    ("Expert packing for your move. <a href=\"contact.html\">Contact us today</a>", "free quotes available. <a href=\"contact.html\">Call or text today</a>"),
     # Mission/vision
     ("Our mission is to provide customized, hassle-free moving services with a focus on care and efficiency.", "Our mission is to deliver reliable handyman services with quality workmanship and honest communication."),
     ("Our vision is to redefine the moving experience by prioritizing customer satisfaction and innovative solutions.", "Our vision is to be the handyman homeowners trust for repairs, improvements, and bespoke woodwork."),
     ("Trusted by over 3,500 clients for reliable moves.", "Trusted for reliable, friendly handyman work."),
     ("Our mission is rooted in delivering smooth, stress-free moving experiences tailored to your unique needs, ensuring every step of your move is handled with care, efficiency, and professionalism.", "We deliver stress-free home projects tailored to your needs—handled with care, skill, and professionalism from start to finish."),
     # Contact
-    ("Call us for inquiries", "Call or text for a free estimate"),
+    ("Call us for inquiries", "Call or text for a free quote"),
     ("Visit us anytime", "Serving local homeowners"),
     # Form fields
     ('placeholder="Distance"', 'placeholder="Project Location"'),

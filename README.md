@@ -6,7 +6,7 @@ Official website for **GrainGuys** — a professional handyman and carpentry ser
 
 ## Project Overview
 
-GrainGuys is a static, multi-page marketing website built to showcase services, portfolio work, team information, and customer engagement features. The site presents GrainGuys as a dependable, skilled handyman brand with clear calls to action for free estimates and contact.
+GrainGuys is a static, multi-page marketing website built to showcase services, portfolio work, team information, and customer engagement features. The site presents GrainGuys as a dependable, skilled handyman brand with clear calls to action for free quotes and contact.
 
 The repository contains the full front-end codebase, assets, and lightweight PHP handlers for form submissions.
 
@@ -16,7 +16,7 @@ The repository contains the full front-end codebase, assets, and lightweight PHP
 
 | Goal | Description |
 |------|-------------|
-| **Lead generation** | Drive inquiries through contact forms, appointment booking, and prominent “Free Estimate” CTAs |
+| **Lead generation** | Drive inquiries through contact forms, appointment booking, and prominent “free quote” CTAs |
 | **Service discovery** | Present eight core service categories with dedicated detail pages |
 | **Trust building** | Highlight testimonials, project galleries, team profiles, and FAQs |
 | **Brand presence** | Deliver a polished, responsive experience that reflects professional craftsmanship |
